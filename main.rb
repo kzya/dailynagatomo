@@ -1,7 +1,7 @@
 require 'opencv'
 include OpenCV
-load './lib/image_display.rb'
+load './lib/edge_detection.rb'
 
-dis = Imagedisplay.new()
-dis.display
+detection = EdgeDetection.new()
 
+detection.edge
