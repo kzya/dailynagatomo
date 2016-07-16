@@ -15,16 +15,16 @@ class Image
 
   def edge
     gaus_image = @resize_image.smooth(CV_GAUSSIAN)
-  # gaus_image, th = gaus_image.threshold(0,255, CV_THRESH_OTSU)
-    @edge_detection = gaus_image.canny(40,40)
+    gaus_image, th = gaus_image.threshold(0,255, CV_THRESH_OTSU)
+    @edge_detection = gaus_image.canny(0,200)
  end
 
 
   def line_detection
-    @hough = @edge_detection.hough_lines(CV_HOUGH_PROBABILISTIC, 1, Math::PI / 300, 10, 10, 10)
+    @hough = @edge_detection.hough_lines(CV_HOUGH_PROBABILISTIC, 1, Math::PI / 10000, 10, 10, 10)
     @result = @edge_detection.GRAY2BGR
     @hough.each do |points|
-      @result.line!(*points, color:CvColor::Yellow, thickness:2, line_type: :aa)
+      @result.line!(*points, color:CvColor::Yellow, thickness:1, line_type: :aa)
     end
   end
 
